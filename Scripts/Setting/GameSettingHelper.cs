@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using GameFramework;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.Setting
 {
     public class GameSettingHelper : SettingHelperBase
     {
@@ -283,7 +282,7 @@ namespace FirstBattle
         /// <returns>读取的对象。</returns>
         public override T GetObject<T>(string settingName)
         {
-            return Utility.Json.ToObject<T>(GetString(settingName));
+            return GameFramework.Utility.Json.ToObject<T>(GetString(settingName));
         }
 
         /// <summary>
@@ -294,7 +293,7 @@ namespace FirstBattle
         /// <returns>读取的对象。</returns>
         public override object GetObject(Type objectType, string settingName)
         {
-            return Utility.Json.ToObject(objectType, GetString(settingName));
+            return GameFramework.Utility.Json.ToObject(objectType, GetString(settingName));
         }
 
         /// <summary>
@@ -312,7 +311,7 @@ namespace FirstBattle
                 return defaultObj;
             }
 
-            return Utility.Json.ToObject<T>(json);
+            return GameFramework.Utility.Json.ToObject<T>(json);
         }
 
         /// <summary>
@@ -330,7 +329,7 @@ namespace FirstBattle
                 return defaultObj;
             }
 
-            return Utility.Json.ToObject(objectType, json);
+            return GameFramework.Utility.Json.ToObject(objectType, json);
         }
 
         /// <summary>
@@ -341,7 +340,7 @@ namespace FirstBattle
         /// <param name="obj">要写入的对象。</param>
         public override void SetObject<T>(string settingName, T obj)
         {
-            SetString(settingName, Utility.Json.ToJson(obj));
+            SetString(settingName, GameFramework.Utility.Json.ToJson(obj));
         }
 
         /// <summary>
@@ -351,12 +350,12 @@ namespace FirstBattle
         /// <param name="obj">要写入的对象。</param>
         public override void SetObject(string settingName, object obj)
         {
-            SetString(settingName, Utility.Json.ToJson(obj));
+            SetString(settingName, GameFramework.Utility.Json.ToJson(obj));
         }
 
         private void Awake()
         {
-            m_FilePath = Utility.Path.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
+            m_FilePath = GameFramework.Utility.Path.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
             m_Settings = new GameSetting();
             m_Serializer = new GameSettingSerializer();
             m_Serializer.RegisterSerializeCallback(0, SerializeGameSettingCallback);

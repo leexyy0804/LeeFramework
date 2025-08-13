@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.DataTable
 {
     public static class BinaryReaderExtension
     {

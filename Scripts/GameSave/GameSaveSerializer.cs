@@ -3,10 +3,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
-using GameFramework;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.GameSave
 {
     public class GameSaveSerializer
     {

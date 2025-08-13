@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using GameFramework;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.GameSave
 {
     public sealed class GameSaveInfo
     {

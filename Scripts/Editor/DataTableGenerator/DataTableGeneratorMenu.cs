@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using GameFramework;
 using UnityEditor;
-using UnityEngine;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableGeneratorMenu
     {

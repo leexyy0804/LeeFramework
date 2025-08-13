@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.Utility
 {
     public static class WebUtility
     {

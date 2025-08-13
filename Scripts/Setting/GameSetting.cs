@@ -5,7 +5,7 @@ using System.Text;
 using GameFramework;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.Setting
 {
     public class GameSetting
     {

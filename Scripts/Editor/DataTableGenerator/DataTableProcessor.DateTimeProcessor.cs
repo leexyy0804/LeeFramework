@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableProcessor
     {
-        private sealed class DateTimeProcessor : GenericDataProcessor<DateTime>
+        private sealed class DateTimeProcessor : DataTableProcessor.GenericDataProcessor<DateTime>
         {
             public override bool IsSystem
             {
@@ -37,7 +37,7 @@ namespace FirstBattle.Editor.DataTableTools
                 return DateTime.Parse(value);
             }
 
-            public override void WriteToStream(DataTableProcessor dataTableProcessor, BinaryWriter binaryWriter, string value)
+            public override void WriteToStream(LeeFramework.Scripts.Editor.DataTableGenerator.DataTableProcessor dataTableProcessor, BinaryWriter binaryWriter, string value)
             {
                 binaryWriter.Write(Parse(value).Ticks);
             }

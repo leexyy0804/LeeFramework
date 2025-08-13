@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using GameFramework;
+using System.Linq;
 using UnityEngine;
 using UnityGameFramework.Runtime;
-using System.Linq;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.GameSave
 {
     public class GameSaveComponent : GameFrameworkComponent
     {
@@ -16,7 +14,7 @@ namespace FirstBattle
         private const int MaxBackupCount = 5;
 
         private string m_FilePath = null;
-        private GameSave m_GameSaves = null;
+        private LeeFramework.Scripts.GameSave.GameSave m_GameSaves = null;
         private GameSaveSerializer m_Serializer = null;
         private float m_AutoSaveTimer = 0f;
         private bool m_IsAutoSaveEnabled = true;
@@ -321,8 +319,8 @@ namespace FirstBattle
         protected override void Awake()
         {
             base.Awake();
-            m_FilePath = Utility.Path.GetRegularPath(Path.Combine(Application.persistentDataPath,  GameSaveDataDirectoryName));
-            m_GameSaves = new GameSave();
+            m_FilePath = GameFramework.Utility.Path.GetRegularPath(Path.Combine(Application.persistentDataPath,  GameSaveDataDirectoryName));
+            m_GameSaves = new LeeFramework.Scripts.GameSave.GameSave();
             m_Serializer = new GameSaveSerializer();
             //m_Serializer.RegisterSerializeCallback(0, SerializeGameSaveCallback);
             //m_Serializer.RegisterDeserializeCallback(0, DeserializeGameSaveCallback);

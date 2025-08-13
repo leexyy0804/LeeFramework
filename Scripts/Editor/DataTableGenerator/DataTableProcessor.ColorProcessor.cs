@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableProcessor
     {
-        private sealed class ColorProcessor : GenericDataProcessor<Color>
+        private sealed class ColorProcessor : DataTableProcessor.GenericDataProcessor<Color>
         {
             public override bool IsSystem
             {
@@ -38,7 +38,7 @@ namespace FirstBattle.Editor.DataTableTools
                 return new Color(float.Parse(splitedValue[0]), float.Parse(splitedValue[1]), float.Parse(splitedValue[2]), float.Parse(splitedValue[3]));
             }
 
-            public override void WriteToStream(DataTableProcessor dataTableProcessor, BinaryWriter binaryWriter, string value)
+            public override void WriteToStream(LeeFramework.Scripts.Editor.DataTableGenerator.DataTableProcessor dataTableProcessor, BinaryWriter binaryWriter, string value)
             {
                 Color color = Parse(value);
                 binaryWriter.Write(color.r);

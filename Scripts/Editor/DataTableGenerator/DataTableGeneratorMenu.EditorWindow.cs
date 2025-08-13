@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using GameFramework;
+using LeeFramework.Scripts.Editor.DataTableGenerator.ExcelGenerator;
+using LeeFramework.Scripts.Extensions;
 using UnityEditor;
 using UnityEngine;
-using GameFramework;
-using Unity.VisualScripting;
-using Object = UnityEngine.Object;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableGeneratorMenu : EditorWindow
     {
@@ -191,7 +191,7 @@ namespace FirstBattle.Editor.DataTableTools
                 DataTableProcessor dataTableProcessor = DataTableGenerator.CreateDataTableProcessor(dataTableName, encoding);
                 if (!DataTableGenerator.CheckRawData(dataTableProcessor, dataTableName))
                 {
-                    Debug.LogError(Utility.Text.Format("Check raw data failure. DataTableName='{0}'", dataTableName));
+                    Debug.LogError(GameFramework.Utility.Text.Format("Check raw data failure. DataTableName='{0}'", dataTableName));
                     break;
                 }
 

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
-    public delegate void DataTableCodeGenerator(DataTableProcessor dataTableProcessor, StringBuilder codeContent, object userData);
+    public delegate void DataTableCodeGenerator(LeeFramework.Scripts.Editor.DataTableGenerator.DataTableProcessor dataTableProcessor, StringBuilder codeContent, object userData);
 }

@@ -1,12 +1,12 @@
-﻿using GameFramework;
-using System.IO;
+﻿using System.IO;
+using GameFramework;
 using UnityEditor;
 using UnityEngine;
 using UnityGameFramework.Editor.ResourceTools;
 
-namespace FirstBattle.Editor
+namespace LeeFramework.Scripts.Editor
 {
-    public sealed class FirstBattleBuildEventHandler : IBuildEventHandler
+    public sealed class BuildEventHandler : IBuildEventHandler
     {
         public bool ContinueOnFailure
         {
@@ -20,7 +20,7 @@ namespace FirstBattle.Editor
             Platform platforms, AssetBundleCompressionType assetBundleCompression, string compressionHelperTypeName, bool additionalCompressionSelected, bool forceRebuildAssetBundleSelected, string buildEventHandlerTypeName, string outputDirectory, BuildAssetBundleOptions buildAssetBundleOptions,
             string workingPath, bool outputPackageSelected, string outputPackagePath, bool outputFullSelected, string outputFullPath, bool outputPackedSelected, string outputPackedPath, string buildReportPath)
         {
-            string streamingAssetsPath = Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
+            string streamingAssetsPath = GameFramework.Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
             string[] fileNames = Directory.GetFiles(streamingAssetsPath, "*", SearchOption.AllDirectories);
             foreach (string fileName in fileNames)
             {
@@ -32,7 +32,7 @@ namespace FirstBattle.Editor
                 File.Delete(fileName);
             }
 
-            Utility.Path.RemoveEmptyDirectory(streamingAssetsPath);
+            GameFramework.Utility.Path.RemoveEmptyDirectory(streamingAssetsPath);
         }
 
         public void OnPostprocessAllPlatforms(string productName, string companyName, string gameIdentifier, string gameFrameworkVersion, string unityVersion, string applicableGameVersion, int internalResourceVersion,
@@ -65,11 +65,11 @@ namespace FirstBattle.Editor
                 return;
             }
 
-            string streamingAssetsPath = Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
+            string streamingAssetsPath = GameFramework.Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
             string[] fileNames = Directory.GetFiles(outputPackagePath, "*", SearchOption.AllDirectories);
             foreach (string fileName in fileNames)
             {
-                string destFileName = Utility.Path.GetRegularPath(Path.Combine(streamingAssetsPath, fileName.Substring(outputPackagePath.Length)));
+                string destFileName = GameFramework.Utility.Path.GetRegularPath(Path.Combine(streamingAssetsPath, fileName.Substring(outputPackagePath.Length)));
                 FileInfo destFileInfo = new FileInfo(destFileName);
                 if (!destFileInfo.Directory.Exists)
                 {

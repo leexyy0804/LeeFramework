@@ -1,10 +1,10 @@
 ﻿using System.IO;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableProcessor
     {
-        private sealed class CommentProcessor : DataProcessor
+        private sealed class CommentProcessor : DataTableProcessor.DataProcessor
         {
             public override System.Type Type
             {
@@ -56,7 +56,7 @@ namespace FirstBattle.Editor.DataTableTools
                 };
             }
 
-            public override void WriteToStream(DataTableProcessor dataTableProcessor, BinaryWriter binaryWriter, string value)
+            public override void WriteToStream(LeeFramework.Scripts.Editor.DataTableGenerator.DataTableProcessor dataTableProcessor, BinaryWriter binaryWriter, string value)
             {
             }
         }

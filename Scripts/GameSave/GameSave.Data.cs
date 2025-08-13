@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using GameFramework;
-using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.GameSave
 {
     public sealed partial class GameSave
     {
@@ -42,7 +40,7 @@ namespace FirstBattle
                     foreach (var kvp in m_GameData)
                     {
                         writer.Write(kvp.Key);
-                        writer.Write(Utility.Json.ToJson(kvp.Value));
+                        writer.Write(GameFramework.Utility.Json.ToJson(kvp.Value));
                         writer.Write(kvp.Value?.GetType().AssemblyQualifiedName ?? string.Empty);
                     }
 
@@ -91,7 +89,7 @@ namespace FirstBattle
                             Type type = Type.GetType(typeName);
                             if (type != null)
                             {
-                                m_GameData[key] = Utility.Json.ToObject(type, jsonValue);
+                                m_GameData[key] = GameFramework.Utility.Json.ToObject(type, jsonValue);
                             }
                             else
                             {

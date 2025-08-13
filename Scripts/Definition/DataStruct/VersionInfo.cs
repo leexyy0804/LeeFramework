@@ -1,4 +1,4 @@
-﻿namespace FirstBattle
+﻿namespace LeeFramework.Scripts.Definition.DataStruct
 {
     public class VersionInfo
     {

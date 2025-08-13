@@ -1,9 +1,9 @@
-﻿using GameFramework.DataTable;
-using System;
+﻿using System;
+using GameFramework.DataTable;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.DataTable
 {
     public static class DataTableExtension
     {
@@ -36,7 +36,7 @@ namespace FirstBattle
 
             string name = splitedNames.Length > 1 ? splitedNames[1] : null;
             DataTableBase dataTable = dataTableComponent.CreateDataTable(dataRowType, name);
-            dataTable.ReadData(dataTableAssetName, Constant.AssetPriority.DataTableAsset, userData);
+            dataTable.ReadData(dataTableAssetName, GameMain.Definition.Constant.Constant.AssetPriority.DataTableAsset, userData);
         }
 
         public static Color32 ParseColor32(string value)

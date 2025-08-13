@@ -1,4 +1,4 @@
-﻿namespace FirstBattle.Editor.DataTableTools
+﻿namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableProcessor
     {

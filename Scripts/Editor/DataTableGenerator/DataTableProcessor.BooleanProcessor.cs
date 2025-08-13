@@ -1,10 +1,10 @@
 ﻿using System.IO;
 
-namespace FirstBattle.Editor.DataTableTools
+namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed partial class DataTableProcessor
     {
-        private sealed class BooleanProcessor : GenericDataProcessor<bool>
+        private sealed class BooleanProcessor : DataTableProcessor.GenericDataProcessor<bool>
         {
             public override bool IsSystem
             {

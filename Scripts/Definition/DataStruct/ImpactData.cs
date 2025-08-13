@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
+using LeeFramework.Scripts.Definition.Enum;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.Definition.DataStruct
 {
     [StructLayout(LayoutKind.Auto)]
     public struct ImpactData

@@ -1,6 +1,6 @@
 ﻿using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.Setting
 {
     public static class SettingExtension
     {

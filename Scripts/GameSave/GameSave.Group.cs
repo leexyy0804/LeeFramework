@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
-using GameFramework;
 using UnityGameFramework.Runtime;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.GameSave
 {
     public sealed partial class GameSave
     {
@@ -32,7 +30,7 @@ namespace FirstBattle
             }
 
             private List<GameSaveInfo> m_GameSaveInfos = new List<GameSaveInfo>();
-            private GameSave.GameSaveData m_CurrentSaveData;
+            private LeeFramework.Scripts.GameSave.GameSave.GameSaveData m_CurrentSaveData;
 
             // 添加游戏状态相关字段
             private float m_PlayTime;
@@ -84,7 +82,7 @@ namespace FirstBattle
 
             private GameSaveGroup()
             {
-                m_CurrentSaveData = GameSave.GameSaveData.CreateEmpty();
+                m_CurrentSaveData = LeeFramework.Scripts.GameSave.GameSave.GameSaveData.CreateEmpty();
             }
 
             public static GameSaveGroup CreateGameSaveFromFile(string filePath)

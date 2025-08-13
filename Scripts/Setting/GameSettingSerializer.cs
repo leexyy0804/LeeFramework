@@ -1,6 +1,6 @@
 ﻿using GameFramework;
 
-namespace FirstBattle
+namespace LeeFramework.Scripts.Setting
 {
     public class GameSettingSerializer : GameFrameworkSerializer<GameSetting>
     {

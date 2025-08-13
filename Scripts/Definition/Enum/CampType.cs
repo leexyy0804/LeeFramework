@@ -1,4 +1,4 @@
-﻿namespace FirstBattle
+﻿namespace LeeFramework.Scripts.Definition.Enum
 {
     /// <summary>
     /// 阵营类型。
