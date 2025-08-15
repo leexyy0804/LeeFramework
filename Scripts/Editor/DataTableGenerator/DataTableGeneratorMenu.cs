@@ -53,7 +53,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// <summary>
         /// 显示当前窗口
         /// </summary>
-        [MenuItem("First Battle/Generate DataTables/Editor Window")]
+        [MenuItem("LeeFramework/Generate DataTables/Editor Window")]
         private static void ShowExcelTools()
         {
             Init();
