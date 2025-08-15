@@ -10,10 +10,11 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed class DataTableGenerator
     {
-        private const string DataTablePath = "Assets/FirstBattle/GameMain/DataTables";
-        private const string DataTableSourcePath = "Assets/FirstBattle/GameMain/DataTables/Txt";
-        private const string CSharpCodePath = "Assets/FirstBattle/GameMain/Scripts/DataTable";
-        private const string CSharpCodeTemplateFileName = "Assets/FirstBattle/GameMain/Configs/DataTableCodeTemplate.txt";
+        private const string DataTablePath = "Assets/GameMain/DataTable";
+        private const string DataTableSourcePath = "Assets/GameMain/DataTable/Txt";
+        private const string CSharpCodePath = "Assets/GameMain/DataTable/Scripts";
+        private const string CSharpCodeTemplateFileName = "Assets/GameMain/Configs/DataTableCodeTemplate.txt";
+        
         private static readonly Regex EndWithNumberRegex = new Regex(@"\d+$");
         private static readonly Regex NameRegex = new Regex(@"^[A-Z][A-Za-z0-9_]*$");
 

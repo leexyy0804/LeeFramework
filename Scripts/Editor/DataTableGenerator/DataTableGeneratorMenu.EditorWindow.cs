@@ -15,81 +15,78 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// <summary>
         /// 当前编辑器窗口实例
         /// </summary>
-        private static DataTableGeneratorMenu instance;
+        private static DataTableGeneratorMenu _instance;
 
         /// <summary>
         /// Excel文件列表
         /// </summary>
-        private static List<string> excelList;
+        private static List<string> _excelList;
 
         /// <summary>
         /// 被选中的Excel文件列表
         /// </summary>
-        private static List<string> selectedExcelList;
+        private static List<string> _selectedExcelList;
 
         /// <summary>
         /// 已经导出的DataTable的名称
         /// </summary>
-        private static HashSet<string> dataTableNames;
+        private static HashSet<string> _dataTableNames;
 
         /// <summary>
         /// 滚动窗口初始位置
         /// </summary>
-        private static Vector2 scrollPos;
+        private static Vector2 _scrollPos;
 
         /// <summary>
         /// 输出格式索引
         /// </summary>
-        private static int indexOfFormat;
+        private static int _indexOfFormat;
 
         /// <summary>
         /// 输出格式
         /// </summary>
-        private static readonly string[] formatOption = { "CSV", "JSON", "XML", "TXT" };
+        private static readonly string[] FormatOption = { "CSV", "JSON", "XML", "TXT" };
 
         /// <summary>
         /// 编码索引
         /// </summary>
-        private static int indexOfEncoding;
+        private static int _indexOfEncoding;
 
         /// <summary>
         /// 编码选项
         /// </summary>
-        private static readonly string[] encodingOption = { "UTF-8", "GB2312" };
+        private static readonly string[] EncodingOption = { "UTF-8", "GB2312" };
 
         /// <summary>
         /// 是否保留原始文件
         /// </summary>
-        private static bool keepSource = true;
+        private static readonly bool KeepSource = true;
 
-        private static readonly string excelPath = Path.Combine(Environment.CurrentDirectory, Path.Combine("Excel", "runtime"));
-
-        private static readonly string
-            outputPath = Path.Combine(Application.dataPath, "FirstBattle/GameMain/DataTables");
+        private static readonly string ExcelPath = Path.Combine(Environment.CurrentDirectory, Path.Combine("Excel", "runtime"));
 
         private static readonly string
-            ClassSavePath = Path.Combine(Application.dataPath, "FirstBattle/GameMain/Scripts/DataTables/");
+            OutputPath = Path.Combine(Application.dataPath, "GameMain/DataTable/Configs/");
 
-        private static readonly string exportedExcelListSavePath = Path.Combine(Application.dataPath, "FirstBattle/GameMain/Configs/DataTableNames.txt");
+        private static readonly string ExportedExcelListSavePath = Path.Combine(Application.dataPath, "GameMain/Configs/DataTableNames.txt");
 
         private static void Init()
         {
             //获取当前实例
-            instance = GetWindow<DataTableGeneratorMenu>();
-            excelList = new List<string>();
-            selectedExcelList = new List<string>();
+            _instance = GetWindow<DataTableGeneratorMenu>();
+            _excelList = new List<string>();
+            _selectedExcelList = new List<string>();
 
-            if (File.Exists(exportedExcelListSavePath))
+            if (File.Exists(ExportedExcelListSavePath))
             {
-                string data = File.ReadAllText(exportedExcelListSavePath);
-                dataTableNames = new HashSet<string>(data.Split(","));
+                string data = File.ReadAllText(ExportedExcelListSavePath);
+                _dataTableNames = new HashSet<string>(data.Split(","));
             }
             else
             {
-                dataTableNames = new HashSet<string>();
+                _dataTableNames = new HashSet<string>();
             }
 
-            scrollPos = new Vector2(instance.position.x, instance.position.y + 75);
+            _scrollPos = new Vector2(_instance.position.x, _instance.position.y + 75);
         }
 
         private void OnGUI()
@@ -105,12 +102,12 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         {
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("请选择格式类型:", GUILayout.Width(85));
-            indexOfFormat = EditorGUILayout.Popup(indexOfFormat, formatOption, GUILayout.Width(125));
+            _indexOfFormat = EditorGUILayout.Popup(_indexOfFormat, FormatOption, GUILayout.Width(125));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("请选择编码类型:", GUILayout.Width(85));
-            indexOfEncoding = EditorGUILayout.Popup(indexOfEncoding, encodingOption, GUILayout.Width(125));
+            _indexOfEncoding = EditorGUILayout.Popup(_indexOfEncoding, EncodingOption, GUILayout.Width(125));
             GUILayout.EndHorizontal();
 
             //keepSource = GUILayout.Toggle(keepSource, "保留Excel源文件");
@@ -121,19 +118,19 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// </summary>
         private void DrawExport()
         {
-            if (excelList == null) return;
-            if (excelList.Count < 1)
+            if (_excelList == null) return;
+            if (_excelList.Count < 1)
             {
-                EditorGUILayout.LabelField($"目录{excelPath}中没有可用excel文件！");
+                EditorGUILayout.LabelField($"目录{ExcelPath}中没有可用excel文件！");
             }
             else
             {
-                EditorGUILayout.LabelField("下列项目将被转换为" + formatOption[indexOfFormat] + ":");
+                EditorGUILayout.LabelField("下列项目将被转换为" + FormatOption[_indexOfFormat] + ":");
                 GUILayout.BeginVertical();
-                scrollPos = GUILayout.BeginScrollView(scrollPos, false, true, GUILayout.Height(excelList.Count * 18 > 200 ? 200 : excelList.Count * 18));
-                foreach (var s in excelList)
+                _scrollPos = GUILayout.BeginScrollView(_scrollPos, false, true, GUILayout.Height(_excelList.Count * 18 > 200 ? 200 : _excelList.Count * 18));
+                foreach (var s in _excelList)
                 {
-                    if (dataTableNames.Contains(s.Split('.')[0]))
+                    if (_dataTableNames.Contains(s.Split('.')[0]))
                     {
                         GUI.color = Color.green;
                     }
@@ -142,15 +139,15 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
                         GUI.color = Color.red;
                     }
                     GUILayout.BeginHorizontal();
-                    bool selected = selectedExcelList.Contains(s);
+                    bool selected = _selectedExcelList.Contains(s);
                     selected = GUILayout.Toggle(selected, s);
-                    if (selected && !selectedExcelList.Contains(s))
+                    if (selected && !_selectedExcelList.Contains(s))
                     {
-                        selectedExcelList.Add(s);
+                        _selectedExcelList.Add(s);
                     }
                     else if(!selected)
                     {
-                        selectedExcelList.Remove(s);
+                        _selectedExcelList.Remove(s);
                     }
                     GUILayout.EndHorizontal();
                 }
@@ -164,7 +161,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
                 if (GUILayout.Button("转换"))
                 {
                     Convert();
-                    instance.Close();
+                    _instance.Close();
                 }
 
                 if (GUILayout.Button("转换为bytes"))
@@ -178,15 +175,15 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         {
             //判断编码类型
             Encoding encoding = null;
-            if (indexOfEncoding == 0 || indexOfEncoding == 3)
+            if (_indexOfEncoding == 0 || _indexOfEncoding == 3)
             {
                 encoding = new UTF8Encoding(false);
             }
-            else if (indexOfEncoding == 1)
+            else if (_indexOfEncoding == 1)
             {
                 encoding = Encoding.GetEncoding("GB2312");
             }
-            foreach (string dataTableName in dataTableNames)
+            foreach (string dataTableName in _dataTableNames)
             {
                 DataTableProcessor dataTableProcessor = DataTableGenerator.CreateDataTableProcessor(dataTableName, encoding);
                 if (!DataTableGenerator.CheckRawData(dataTableProcessor, dataTableName))
@@ -207,7 +204,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// </summary>
         private static void Convert()
         {
-            if (selectedExcelList == null || selectedExcelList.Count == 0)
+            if (_selectedExcelList == null || _selectedExcelList.Count == 0)
             {
                 Debug.LogError("No excel selected!");
                 return;
@@ -215,11 +212,11 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
 
             //判断编码类型
             Encoding encoding = null;
-            if (indexOfEncoding == 0 || indexOfEncoding == 3)
+            if (_indexOfEncoding == 0 || _indexOfEncoding == 3)
             {
                 encoding = new UTF8Encoding(false);
             }
-            else if (indexOfEncoding == 1)
+            else if (_indexOfEncoding == 1)
             {
                 encoding = Encoding.GetEncoding("GB2312");
             }
@@ -227,38 +224,61 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
             //FileUtil.DeleteFileOrDirectory(exportedExcelListSavePath);
             //dataTableNames.Clear();
 
-            foreach (var assetsPath in selectedExcelList)
+            foreach (var assetsPath in _selectedExcelList)
             {
                 //获取Excel文件的绝对路径
-                var path = excelPath + "/" + assetsPath;
+                var path = ExcelPath + "/" + assetsPath;
                 //构造Excel工具类
                 var excel = new ExcelUtility(path);
 
                 //判断输出类型
-                var output = "";
-                if (indexOfFormat == 0)
+                if (_indexOfFormat == 0)
                 {
-                    output = Path.Join(outputPath, "Csv", assetsPath.Replace(".xlsx", ".csv"));
-                    dataTableNames.AddRange(excel.ConvertToCSV(output, encoding));
+                    var outputPath = Path.Join(OutputPath, "Csv");
+                    if (!Directory.Exists(outputPath))
+                    {
+                        Directory.CreateDirectory(outputPath);
+                    }
+
+                    var output = Path.Combine(outputPath, assetsPath.Replace(".xlsx", ".csv"));
+                    _dataTableNames.AddRange(excel.ConvertToCSV(output, encoding));
                 }
-                else if (indexOfFormat == 1)
+                else if (_indexOfFormat == 1)
                 {
-                    output = Path.Join(outputPath, "Json", assetsPath.Replace(".xlsx", ".json"));
-                    dataTableNames.AddRange(excel.ConvertToJson(output, encoding));
+                    var outputPath = Path.Join(OutputPath, "Json");
+                    if (!Directory.Exists(outputPath))
+                    {
+                        Directory.CreateDirectory(outputPath);
+                    }
+
+                    var output = Path.Combine(outputPath, assetsPath.Replace(".xlsx", ".json"));
+                    _dataTableNames.AddRange(excel.ConvertToJson(output, encoding));
                 }
-                else if (indexOfFormat == 2)
+                else if (_indexOfFormat == 2)
                 {
-                    output = Path.Join(outputPath, "Xml", assetsPath.Replace(".xlsx", ".xml"));
-                    dataTableNames.AddRange(excel.ConvertToXml(output));
+                    var outputPath = Path.Join(OutputPath, "Xml");
+                    if (!Directory.Exists(outputPath))
+                    {
+                        Directory.CreateDirectory(outputPath);
+                    }
+                    
+                    var output = Path.Combine(outputPath, assetsPath.Replace(".xlsx", ".xml"));
+                    _dataTableNames.AddRange(excel.ConvertToXml(output));
                 }
-                else if (indexOfFormat == 3)
+                else if (_indexOfFormat == 3)
                 {
-                    output = Path.Join(outputPath, "Txt", assetsPath.Replace(".xlsx", ".txt"));
-                    dataTableNames.AddRange(excel.ConvertToTxt(output, encoding));
+                    var outputPath = Path.Join(OutputPath, "Txt");
+                    if (!Directory.Exists(outputPath))
+                    {
+                        Directory.CreateDirectory(outputPath);
+                    }
+                    
+                    var output = Path.Combine(outputPath, assetsPath.Replace(".xlsx", ".txt"));
+                    _dataTableNames.AddRange(excel.ConvertToTxt(output, encoding));
                 }
 
                 //判断是否保留源文件
-                if (!keepSource)
+                if (!KeepSource)
                 {
                     FileUtil.DeleteFileOrDirectory(path);
                 }
@@ -268,9 +288,9 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
             }
 
             //写入文件
-            using var fileStream = new FileStream(exportedExcelListSavePath, FileMode.Create, FileAccess.Write);
+            using var fileStream = new FileStream(ExportedExcelListSavePath, FileMode.Create, FileAccess.Write);
             using TextWriter textWriter = new StreamWriter(fileStream, encoding ?? new UTF8Encoding(false));
-            textWriter.Write(string.Join(",", dataTableNames));
+            textWriter.Write(string.Join(",", _dataTableNames));
         }
 
         /// <summary>
@@ -278,24 +298,24 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// </summary>
         private static void LoadExcel()
         {
-            if (excelList == null) excelList = new List<string>();
-            excelList.Clear();
+            if (_excelList == null) _excelList = new List<string>();
+            _excelList.Clear();
 
-            var dir = new DirectoryInfo(excelPath);
+            var dir = new DirectoryInfo(ExcelPath);
             var fileInfo = dir.GetFileSystemInfos();
             foreach (var fileSystemInfo in fileInfo)
             {
                 if (fileSystemInfo.Name.EndsWith(".xlsx"))
                 {
-                    excelList.Add(fileSystemInfo.Name);
+                    _excelList.Add(fileSystemInfo.Name);
                 }
             }
 
-            foreach (var dataTableName in dataTableNames)
+            foreach (var dataTableName in _dataTableNames)
             {
-                if (!excelList.Contains(dataTableName + ".xlsx"))
+                if (!_excelList.Contains(dataTableName + ".xlsx"))
                 {
-                    dataTableNames.Remove(dataTableName);
+                    _dataTableNames.Remove(dataTableName);
                 }
             }
         }

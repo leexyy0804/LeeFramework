@@ -12,14 +12,14 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         [MenuItem("First Battle/Generate DataTables/From Txt To Bytes")]
         private static void GenerateDataTablesFromTxtToBytes()
         {
-            if (File.Exists(exportedExcelListSavePath))
+            if (File.Exists(ExportedExcelListSavePath))
             {
-                string data = File.ReadAllText(exportedExcelListSavePath);
-                dataTableNames = new HashSet<string>(data.Split(","));
+                string data = File.ReadAllText(ExportedExcelListSavePath);
+                _dataTableNames = new HashSet<string>(data.Split(","));
             }
             else
             {
-                dataTableNames = new HashSet<string>();
+                _dataTableNames = new HashSet<string>();
             }
             ConvertToBytes();
         }
@@ -30,23 +30,23 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         [MenuItem("First Battle/Generate DataTables/From Excel To Txt")]
         private static void GenerateDataTablesFromExcelToTxt()
         {
-            if (File.Exists(exportedExcelListSavePath))
+            if (File.Exists(ExportedExcelListSavePath))
             {
-                string data = File.ReadAllText(exportedExcelListSavePath);
-                dataTableNames = new HashSet<string>(data.Split(","));
+                string data = File.ReadAllText(ExportedExcelListSavePath);
+                _dataTableNames = new HashSet<string>(data.Split(","));
             }
             else
             {
-                dataTableNames = new HashSet<string>();
+                _dataTableNames = new HashSet<string>();
             }
 
             LoadExcel();
 
-            indexOfFormat = 3;
-            indexOfEncoding = 0;
-            if (selectedExcelList == null) selectedExcelList = new List<string>();
-            selectedExcelList.Clear();
-            selectedExcelList.AddRange(excelList);
+            _indexOfFormat = 3;
+            _indexOfEncoding = 0;
+            if (_selectedExcelList == null) _selectedExcelList = new List<string>();
+            _selectedExcelList.Clear();
+            _selectedExcelList.AddRange(_excelList);
             Convert();
         }
 
@@ -59,7 +59,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
             Init();
             //加载Excel文件
             LoadExcel();
-            instance.Show();
+            _instance.Show();
         }
     }
 }
