@@ -9,7 +9,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// <summary>
         /// 从Txt导出为最终格式
         /// </summary>
-        [MenuItem("First Battle/Generate DataTables/From Txt To Bytes")]
+        [MenuItem("LeeFramework/Generate DataTables/From Txt To Bytes")]
         private static void GenerateDataTablesFromTxtToBytes()
         {
             if (File.Exists(ExportedExcelListSavePath))
@@ -27,7 +27,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
         /// <summary>
         /// 从excel导出为txt格式
         /// </summary>
-        [MenuItem("First Battle/Generate DataTables/From Excel To Txt")]
+        [MenuItem("LeeFramework/Generate DataTables/From Excel To Txt")]
         private static void GenerateDataTablesFromExcelToTxt()
         {
             if (File.Exists(ExportedExcelListSavePath))
