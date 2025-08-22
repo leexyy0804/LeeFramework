@@ -10,8 +10,8 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
 {
     public sealed class DataTableGenerator
     {
-        private const string DataTablePath = "Assets/GameMain/DataTable";
-        private const string DataTableSourcePath = "Assets/GameMain/DataTable/Txt";
+        private const string DataTablePath = "Assets/GameMain/DataTable/Bytes";
+        private const string DataTableSourcePath = "Assets/GameMain/DataTable/Configs/Txt";
         private const string CSharpCodePath = "Assets/GameMain/DataTable/Scripts";
         private const string CSharpCodeTemplateFileName = "Assets/GameMain/Configs/DataTableCodeTemplate.txt";
         
@@ -58,6 +58,10 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator
             dataTableProcessor.SetCodeGenerator(DataTableCodeGenerator);
 
             string csharpCodeFileName = GameFramework.Utility.Path.GetRegularPath(Path.Combine(CSharpCodePath, "DR" + dataTableName + ".cs"));
+            if (!Directory.Exists(CSharpCodePath))
+            {
+                Directory.CreateDirectory(CSharpCodePath);
+            }
             if (!dataTableProcessor.GenerateCodeFile(csharpCodeFileName, Encoding.UTF8, dataTableName) && File.Exists(csharpCodeFileName))
             {
                 File.Delete(csharpCodeFileName);

@@ -113,7 +113,7 @@ namespace LeeFramework.Scripts.Editor.DataTableGenerator.ExcelGenerator
         }
 
         /// <summary>
-        /// 转换为lua
+        /// 转换为txt
         /// </summary>
         /// <param name="savePath">文件保存路径</param>
         /// <param name="encoding"></param>
